@@ -27,7 +27,7 @@ def get_active_window_raw():
     match = re.match(b"WM_NAME\(\w+\) = (?P<name>.+)$", stdout)
     if match != None:
         ret = match.group("name").strip(b'"')
-        #print(type(ret))
+        # print(type(ret))
         '''
         ret is str for python2
         ret is bytes for python3 (- gives error while calling in other file)
@@ -35,6 +35,7 @@ def get_active_window_raw():
         '''
         return ret
     return None
+
 
 '''
 this file alone can be run without importing other files
@@ -54,19 +55,20 @@ uncomment the below lines for linux - works - but activities won't be dumped in 
 
 # run()
 def get_chrome_url_x():
-        ''' 
-        instead of url the name of the website and the title of the page is returned seperated by '/' 
-        '''
-        detail_full = get_active_window_raw()
-        detail_list = detail_full.split(' - ')
-        detail_list.pop()
-        detail_list = detail_list[::-1]
-        _active_window_name = 'Google Chrome -> ' + " / ".join(detail_list)
-        return _active_window_name
+    ''' 
+    instead of url the name of the website and the title of the page is returned seperated by '/' 
+    '''
+    detail_full = get_active_window_raw()
+    detail_list = detail_full.split(' - ')
+    detail_list.pop()
+    detail_list = detail_list[::-1]
+    _active_window_name = 'Google Chrome -> ' + " / ".join(detail_list)
+    return _active_window_name
+
 
 def get_active_window_x():
     full_detail = get_active_window_raw()
-    detail_list = None if None else full_detail.split(" - ")
-    new_window_name = detail_list[-1]
-    return new_window_name
-
+    # detail_list = [''] if None else full_detail.split(" - ")
+    # new_window_name = detail_list[-1]
+    # return new_window_name
+    return full_detail
